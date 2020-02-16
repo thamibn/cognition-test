@@ -13,8 +13,11 @@
 
 Route::get('/', function () {
     return view('front');
-});
+})->name('/');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/new/ticket', 'TicketController@create')->name('new_ticket');
+Route::get('/tickets', 'TicketController@index')->name('tickets');
+Route::post('/tickets', 'TicketController@store')->name('create_ticket');

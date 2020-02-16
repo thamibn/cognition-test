@@ -9,13 +9,18 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'element-ui/lib/theme-chalk/index.css';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+import ElementUI from 'element-ui';
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+Vue.use(ElementUI);
 
 /**
  * The following block of code may be used to automatically register your

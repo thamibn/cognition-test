@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Ticket;
+use App\Services\TicketService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
+    private $ticketService;
+    public function __construct(TicketService $ticketService)
+    {
+        $this->ticketService = $ticketService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = $this->ticketService->all();
+        return view('admin.tickets.tickets', ['tickets' => $tickets]);
     }
 
     /**
@@ -24,7 +33,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->get();
+        $ticket_number = strtoupper(Str::random(1)).'-'.time();
+        return view('admin.tickets.create_ticket', ['ticket_number'=> $ticket_number, 'categories' => $categories]);
     }
 
     /**
@@ -35,7 +46,7 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
