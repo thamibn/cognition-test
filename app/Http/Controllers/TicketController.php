@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Ticket;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class TicketController extends Controller
@@ -34,7 +35,7 @@ class TicketController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name', 'asc')->get();
-        $ticket_number = strtoupper(Str::random(1)).'-'.time();
+        $ticket_number = strtoupper(Str::random(1)).time();
         return view('admin.tickets.create_ticket', ['ticket_number'=> $ticket_number, 'categories' => $categories]);
     }
 
@@ -46,6 +47,8 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $position = Location::get();
         dd($request);
     }
 
