@@ -24,9 +24,12 @@ class CreateTicket extends FormRequest
     public function rules()
     {
         return [
-            'complainant_fullname' => 'required',
-            'complainant_email' => 'required',
-            'complainant_tel' => 'required'
+            'ticket_number' => 'required|min:3|max:225|unique:tickets',
+            'complainant_fullname' => 'required|min:3|string|max:225',
+            'complainant_email' => 'required|min:3|email|max:225',
+            'complainant_tel' => 'required|digits_between:1,15',
+            'message' => 'required|min:3|max:225',
+            'category_id' => 'required|integer|exists:categories'
         ];
     }
 }

@@ -8,8 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    protected $guarded = ['id']; // this allows us to mass assign all values to tickets table except the id field.c
-
+    protected $guarded = ['id']; // this allows us to mass assign all values to tickets table except the id field.
+    
+    /*
+    * Cast the location object to array and stringfy it with json_encode
+    */
+    protected $casts = [
+        'captured_location' => 'array'
+    ]; 
     public function user()
     {
         return $this->belongsTo(User::class);

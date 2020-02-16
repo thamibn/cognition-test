@@ -23,7 +23,7 @@ class CreateTicketsTable extends Migration
             $table->string('complainant_email');
             $table->string('complainant_tel');
             $table->string('status');
-            $table->string('captured_location');
+            $table->text('captured_location');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -9,7 +9,7 @@
                 <div class="card-body"> 
                     <form method="POST" action="{{ route('create_ticket') }}">
                         @csrf
-
+                        <input id="ticket_number" value="{{ $ticket_number }}" type="text" required name="ticket_number" hidden>
                         <div class="form-group row">
                             <label for="ticket_number" class="col-md-4 col-form-label text-md-right">Ticket Number</label>
                             <div class="col-md-6">
@@ -44,7 +44,7 @@
                             <label for="complainant_fullname" class="col-md-4 col-form-label text-md-right">Complainant Full Name</label>
 
                             <div class="col-md-6">
-                                <input id="complainant_fullname" type="text" class="form-control @error('complainant_fullname') is-invalid @enderror" name="complainant_fullname" required>
+                                <input value="{{ old('complainant_fullname') }}" id="complainant_fullname" type="text" class="form-control @error('complainant_fullname') is-invalid @enderror" name="complainant_fullname" required>
 
                                 @error('complainant_fullname')
                                     <span class="invalid-feedback" role="alert">
@@ -55,10 +55,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="complainant_email" class="col-md-4 col-form-label text-md-right">Complainant Email</label>
+                            <label  for="complainant_email" class="col-md-4 col-form-label text-md-right">Complainant Email</label>
 
                             <div class="col-md-6">
-                                <input id="complainant_email" type="text" class="form-control @error('complainant_email') is-invalid @enderror" name="complainant_email" required>
+                                <input value="{{ old('complainant_email') }}" id="complainant_email" type="text" class="form-control @error('complainant_email') is-invalid @enderror" name="complainant_email" required>
 
                                 @error('complainant_email')
                                     <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
                             <label for="complainant_tel" class="col-md-4 col-form-label text-md-right">Complainant Tel</label>
 
                             <div class="col-md-6">
-                                <input id="complainant_tel" type="text" class="form-control @error('complainant_tel') is-invalid @enderror" name="complainant_tel" required>
+                                <input value="{{ old('complainant_tel') }}" id="complainant_tel" type="text" class="form-control @error('complainant_tel') is-invalid @enderror" name="complainant_tel" required>
 
                                 @error('complainant_tel')
                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                             <label for="message" class="col-md-4 col-form-label text-md-right">Message</label>
 
                             <div class="col-md-6">
-                                <textarea id="message" class="form-control @error('message') is-invalid @enderror" name="message" required></textarea>
+                                <textarea id="message" class="form-control @error('message') is-invalid @enderror" name="message" required>{{ old('message') }}</textarea>
 
                                 @error('message')
                                     <span class="invalid-feedback" role="alert">
