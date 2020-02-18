@@ -13,7 +13,8 @@
                         </div>
                     @endif
                     <b-button variant="primary" href="{{ route('new_ticket') }}">Create Ticket</b-button>
-                    <ticket-table :data="{{ $tickets }}"></ticket-table>
+                    {{-- vue js component my table --}}
+                    <ticket-table url="{{ url()->current() }}" :data="{{ $tickets }}"></ticket-table>
                     
                 </div>
             </div>

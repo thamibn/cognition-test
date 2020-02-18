@@ -29,7 +29,7 @@ class CreateTicket extends FormRequest
             'complainant_email' => 'required|min:3|email|max:225',
             'complainant_tel' => 'required|digits_between:1,15',
             'message' => 'required|min:3|max:225',
-            'category_id' => 'required|integer|exists:categories'
+            'category_id' => 'required|integer'
         ];
     }
 }

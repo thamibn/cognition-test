@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTicket;
-use App\Http\Resources\TicketResource;
 use App\Models\Ticket;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -12,6 +11,7 @@ use App\Services\TicketService;
 
 class TicketController extends Controller
 {
+    
     private $ticketService;
     public function __construct(TicketService $ticketService)
     {
@@ -22,9 +22,10 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = $this->ticketService->all();
+        $tickets = $this->ticketService->all($request);
+       //dd($tickets->toArray());
         return view('admin.tickets.tickets', ['tickets' => $tickets]);
     }
 
@@ -83,9 +84,11 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ticket $ticket)
+    public function update(Request $request, $id)
     {
-        //
+        $t = $this->ticketService->update($request, $id);
+        $tickets = $this->ticketService->all();
+        return $tickets;
     }
 
     /**
@@ -99,16 +102,18 @@ class TicketController extends Controller
         //
     }
 
-    public function getIp(){
-        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
-            if (array_key_exists($key, $_SERVER) === true){
-                foreach (explode(',', $_SERVER[$key]) as $ip){
-                    $ip = trim($ip); // just to be safe
-                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
-                        return $ip;
-                    }
-                }
-            }
-        }
+    public function ticketStatusForm(){
+        return view('admin.tickets.ticket_status_form');
+    }
+
+    public function status($ticket_number){
+        $ticket = Ticket::with(['user','category'])->where('ticket_number', $ticket_number)->first();
+
+        return view('admin.tickets.ticket_details', ['ticket' => $ticket]);
+    }
+    public function postGetStatus(Request $request){
+        $ticket = Ticket::with(['user','category'])->where('ticket_number', $request->ticket_number)->first();
+        
+        return view('admin.tickets.ticket_details', ['ticket' => $ticket]);
     }
 }
