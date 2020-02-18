@@ -15,12 +15,14 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ```
 
-###Steps
+### Steps
 
 ``` 
-composer install 
-npm install 
-npm run dev or npm run watch 
+1. composer install 
+
+2. npm install 
+
+3. npm run dev or npm run watch 
 ```
 
 configure database connection on ``` .env ``` file, make sure you create the database first recommended for this project on xampp phpmyadmin create an empty database call it cognition
@@ -31,22 +33,22 @@ DB_PORT=3306
 DB_DATABASE=cognition
 DB_USERNAME=root
 DB_PASSWORD=
-
 ```
 ```
-php artisan migrate --seed
+4. php artisan migrate --seed
 ```
 ```
-php artisan run serve
-
+5. php artisan run serve
 ```
 
-###Login Details
+### Login Details
 ```
 email: support1@test.com or support2@test.com or support3@test.com
-passport: password
+password: password
 
 ```
+please contact thami @ 065 927 1587 for any help.
+
 
 
 
